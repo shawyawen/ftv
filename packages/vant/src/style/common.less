@@ -1,0 +1,60 @@
+/* 定义动画 */
+@keyframes gradient {
+  0% {
+    background-position: 160% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.ftv-focus {
+  border-radius: 40px;
+  transform: scale(1.04);
+  transition: 200ms;
+  position: relative;
+  z-index: 1;
+  background: #f1f6ff !important;
+  color: rgba(0, 0, 0, 0.9) !important;
+  &:after {
+    --m-i: linear-gradient(#000, #000);
+    --m-o: content-box, padding-box;
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    padding: var(--border-width);
+    border-radius: var(--border-radius);
+    //background-image: conic-gradient(#0032ff, #ff00ec, #ff0000);
+    -webkit-mask-image: var(--m-i), var(--m-i);
+    mask-image: var(--m-i), var(--m-i);
+    -webkit-mask-origin: var(--m-o);
+    mask-origin: var(--m-o);
+    -webkit-mask-clip: var(--m-o);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    //filter: hue-rotate(0) grayscale(1);
+    //animation: rotate-hue linear 1200ms infinite;
+    --border-radius: var(--van-radius-md);
+    --border-width: 3px;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 1),
+    );
+    background-size: 300% 300%;
+    animation: gradient 2s ease infinite;
+  }
+}
+
+&.van-button--round::after {
+  border-radius: var(--van-button-round-radius);
+  .ftv-focus {
+    &:after {
+      --border-radius: var(--van-button-round-radius);
+    }
+  }
+}
